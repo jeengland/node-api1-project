@@ -1,14 +1,14 @@
 import React from 'react';
+import axios from 'axios';
 
-const UserList = ({ data }) => {
+import User from './User';
+
+const UserList = ({ data, setData }) => {
     return (
         <section className='container'>
-            { data.map((user) => {
+            { data.map((user, index) => {
                 return (
-                    <div key={user.id}>
-                        <h2>{user.name}</h2>
-                        <p>{user.bio}</p>
-                    </div>
+                    <User key={index} name={user.name} bio={user.bio} id={user.id} setData={setData} />
                 )
             })}
         </section>

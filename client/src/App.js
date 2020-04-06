@@ -13,7 +13,7 @@ function App() {
   }, [])
   return (
     <div className="App">
-      <UserList data={data}/>
+      <UserList data={data} setData={setData}/>
     </div>
   );
 }
