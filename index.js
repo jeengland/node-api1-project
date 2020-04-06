@@ -39,11 +39,15 @@ let users = [
 
 // endpoints
 server.get('/api/users', (req, res) => {
-    res.json(users);
+    try {
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ errorMessage: 'The users information could not be retrieved' });
+    }
 })
 
 server.post('/api/users', (req, res) => {
-    newUser = req.body;
+    const newUser = req.body;
 
     if (newUser.name && newUser.bio) {
         try {
@@ -51,10 +55,26 @@ server.post('/api/users', (req, res) => {
             users.push(newUser);
             res.status(201).json(users);
         } catch (error) {
-            res.status(500).json({ errorMessage: "There was an error while saving the user to the database" })
+            res.status(500).json({ errorMessage: 'There was an error while saving the user to the database' });
         }
     } else {
-        res.status(400).json({ errorMessage: "Please provide name and bio for the user." });
+        res.status(400).json({ errorMessage: 'Please provide name and bio for the user.' });
+    }
+})
+
+server.get('/api/users/:id', (req, res) => {
+    const id = req.params.id;
+
+    const user = users.find((user) => user.id === id);
+
+    if (user) {
+        try {
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(500).json({ errorMessage: 'The user information could not be retrieved' });
+        }
+    } else {
+        res.status(404).json({ message: 'The user with the specified ID does not exist' });
     }
 })
 
