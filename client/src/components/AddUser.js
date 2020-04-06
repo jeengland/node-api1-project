@@ -1,5 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styled from '@emotion/styled';
+
+const Form = styled.form`
+    width: 400px;
+    background-color: papayawhip;
+    margin: 0 auto;
+    padding: 1%;
+    border: 1px solid black;
+    border-radius: 5px;
+    .formRow {
+        label {
+            display: inline-block;
+            width: 15%;
+            text-align: right;
+            margin: 1% 5px 2% 0;
+        }
+    }
+`
 
 const AddUser = ({setData}) => {
     const [state, setState] = useState({ name: '', bio: '' })
@@ -18,7 +36,7 @@ const AddUser = ({setData}) => {
         setState({ name: '', bio: '' })
     } 
     return (
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <div className='formRow'>
                 <label htmlFor='newName'>Name:</label>
                 <input type='text' name='name' id='name' value={state.name} onChange={handleChange} />
@@ -28,7 +46,7 @@ const AddUser = ({setData}) => {
                 <input type='text' name='bio' id='bio' value={state.bio} onChange={handleChange} />
             </div>
             <button type='submit'>Add User</button>
-        </form>
+        </Form>
     )
 }
 
