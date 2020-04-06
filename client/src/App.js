@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import UserList from './components/UserList';
+import AddUser from './components/AddUser';
 
 function App() {
   const [data, setData] = useState([]);
@@ -13,6 +14,7 @@ function App() {
   }, [])
   return (
     <div className="App">
+      <AddUser setData={setData}/>
       <UserList data={data} setData={setData}/>
     </div>
   );
